@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1571130419 source:d:\netfo\documents\oe\ludus\cpp\lecai\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1572340947 source:d:\netfo\documents\ludus\c\lec\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<math.h>
+
