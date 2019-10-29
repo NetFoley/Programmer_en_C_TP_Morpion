@@ -4,8 +4,6 @@
 #include <math.h>
 
 #define NFOIS 5
-#define JOUEUR1 'X'
-#define JOUEUR2 'O'
 
 /*
 int main()
@@ -28,7 +26,11 @@ int main()
     return 0;
 }
 */
+
+//Définition constantes du tableau
 #define tTAILLE 3
+#define JOUEUR1 'X'
+#define JOUEUR2 'O'
 
 
 int changerCase(char tabMorpion[tTAILLE][tTAILLE], char joueur, int nPosX, int nPosY);
@@ -69,25 +71,30 @@ void main()
         fflush(stdin);
     }while((car[compteur]>='a' && car[compteur] <='z' || car[compteur]>='A' && car[compteur]<='Z') && compteur < 30);*/
 
+
+    //Definition des variables
     char tabMorpion[tTAILLE][tTAILLE];
     int nVictoire = 0;
     int nCompteur = 0;
     int nEntreeX = 0;
     int nEntreeY = 0;
-
     char joueurNow;
 
+    //Initialisation du tableau
     initialiserMorpion(tabMorpion);
 
+    //Boucle de jeu
     while (nVictoire == 0 && nCompteur < 9)
     {
         afficherMorpion(tabMorpion);
+        //Première demande à l'utilisateur
         if (nCompteur == 0)
         {
             printf("Voici le plateau du morpion, :\nOu placez votre case ?\n", JOUEUR1);
         }
+
         do{
-            if (nCompteur % 2 == 0)
+            if (nCompteur % 2 == 0) // Alterner joueur 1 et 2
             {
                 joueurNow = JOUEUR1;
             }
@@ -99,9 +106,12 @@ void main()
                 nEntreeX = demandeNombre('x');
                 nEntreeY = demandeNombre('y');
         }while(changerCase(tabMorpion, joueurNow, nEntreeX, nEntreeY) == 0);
+
         nVictoire = verifVictoire(tabMorpion);
         nCompteur++;
     }
+
+    //Fin de la partie, affichage du morpion et désignation des gagnants
     afficherMorpion(tabMorpion);
     switch (nVictoire){
     case 0 :
@@ -118,17 +128,18 @@ void main()
 }
 
 void initialiserMorpion(char tabMorpion[tTAILLE][tTAILLE]){
+    //initialisation du morpion sur des cases vides "étoiles"
     for ( int i = 0; i < tTAILLE; i++)
     {
         for ( int j = 0 ; j < tTAILLE; j++)
         {
-            //initialisation du morpion sur des cases vides "étoiles"
             tabMorpion[i][j] = '*';
         }
     }
 }
 
 void afficherMorpion(char tabMorpion[tTAILLE][tTAILLE])
+//Affiches toutes les valeurs d'un tableau morpion
 {
     printf("\n");
     for ( int i = 0; i < tTAILLE ; i++)
@@ -142,6 +153,7 @@ void afficherMorpion(char tabMorpion[tTAILLE][tTAILLE])
 }
 
 int changerCase(char tabMorpion[tTAILLE][tTAILLE], char joueur, int nPosX, int nPosY)
+//Vérifie si une case est valide et effectue le changement en fonction
 {
     int valider = 1;
     printf("Changement de la case en position [%i][%i]\n", nPosY, nPosX);
